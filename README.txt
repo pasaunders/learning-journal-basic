@@ -17,4 +17,3 @@ Home is at '/'
 New entries will be at '/journal/new-entry'
 Detail view will be at '/journal/1'
 Edit view will be at '/journal/1/edit-entry'
-
