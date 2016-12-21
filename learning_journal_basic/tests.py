@@ -39,3 +39,17 @@ def test_home_page_renders_file_data(req):
     from .views import home_page
     response = home_page(req)
     assert "message_goes_here" in response
+
+
+@pytest.fixture
+def test():
+    """Test app fixture."""
+    from webtest import TestApp
+    from learning_journal_basic import main
+    app = main({})
+
+
+def test_home_page_has_list(testapp):
+    """Response is a get to homepage, expecting a 200 response."""
+    response = testapp.get("/", status=200)
+    inner_html = response.html

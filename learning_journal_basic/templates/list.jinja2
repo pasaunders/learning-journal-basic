@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home Page</title>
-</head>
-<body>
+{% extends "layout.jinja2" %}
+{% block title %}title_ovverides_default{% endblock %}
+
+{% block body %}
 <h1>This is a list templage</h1>
 <ul>
     {% for item in temp_list %}
         <li>{{ item }}</li>
     {% endfor %}
 </ul>
-</body>
-</html>
+{% endblock %}

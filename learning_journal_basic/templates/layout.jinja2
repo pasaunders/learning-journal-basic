@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}default_title{% endblock %}</title>
+    <!-- includse css file via href, also needs the config.add_static_view entry in __init__ -->
+    <!-- The same technique can be used to link javascript files iin the end of the body -->
+    <link rel="stylesheet" type="text/css" href="{{request.static_path('learning_journal_basic:static/base.css')}}">
+</head>
+<body>
+{% block body %}{% endblock %}
+
+    <nav>
+        <button>
+        <a href="{{
+        request.route_url('home') }}">To The Home Page</a>
+        </button>
+    </nav>
+</body>
+</html>
