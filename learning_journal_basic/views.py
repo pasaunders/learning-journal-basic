@@ -11,7 +11,7 @@ list_template = [
     {'id': 5,
      'title': 'day 12',
      'creation_date': '12/20/2016',
-     'body': "placeholder"},
+     'body': "I'm not holding my end up. Claire's understanding of pyramid is way ahead of mine, and we don't have enough time to let me work through it myself. There's so much here, and I'm stuck cargo-culting my way through. I think I understnd how the templates are hooked up though, and the MVC format in python is making sense."},
     {'id': 4,
      'title': 'day 11',
      'creation_date': '12/19/2016',
