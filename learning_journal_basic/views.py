@@ -43,7 +43,7 @@ list_template = [
 ]
 
 
-@view_config(route_name='home', renderer='string')
+@view_config(route_name='home', renderer='templates/list.jinja2')
 def home_page(request):
     """Define location of home page."""
     # this is how to use a jinja template:
@@ -52,23 +52,24 @@ def home_page(request):
     # return Response(imported_text)
 
 
-def edit_page(request):
-    """Define location of edit journal entry."""
-    imported_text = open(os.path.join(HERE, 'templates/edit.html')).read()
+# def edit_page(request):
+#     """Define location of edit journal entry."""
+#     imported_text = open(os.path.join(HERE, 'templates/edit.html')).read()
 
-    return imported_text
-    # return Response(imported_text)
+#     return imported_text
+#     # return Response(imported_text)
 
-
+@view_config(route_name='detail', renderer='templates/detail.jinja2')
 def detail_page(request):
     """Define location of detail page."""
-    imported_text = open(os.path.join(HERE, 'templates/detail.html')).read()
-    return imported_text
+    entry_id = request.matchdict['id']
+    dictionary_filtered = [entry for entry in list_template if entry['id'] == int(entry_id)]
+    return {'entry_detail': dictionary_filtered[0]}
     # return Response(imported_text)
 
 
-def new_entry(request):
-    """Define location of new entry."""
-    imported_text = open(os.path.join(HERE, 'templates/new.html')).read()
-    return imported_text
-    # return Response(imported_text)
+# def new_entry(request):
+#     """Define location of new entry."""
+#     imported_text = open(os.path.join(HERE, 'templates/new.html')).read()
+#     return imported_text
+#     # return Response(imported_text)
