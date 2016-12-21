@@ -5,7 +5,8 @@
 <h2>Journal Entries</h2>
 <ul>
     {% for item in entry_list %}
-        <li>{{ item }}</li>
+        <li><a href="{{request.route_url('detail', id=item.id) }}">{{ item.title }}</a></li>
+        <li>{{ item.creation_date}}
     {% endfor %}
 </ul>
 {% endblock %}
