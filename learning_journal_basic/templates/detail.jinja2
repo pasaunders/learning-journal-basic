@@ -1,0 +1,9 @@
+{% extends "layout.jinja2" %}
+{% block title %}title_overrides_default{% endblock %}
+
+{% block body %}
+<h2>Journal Entries</h2>
+<h3>{{ entry_detail.title }}</h3>
+<p>{{entry_detail.creation_date}}</p>
+<p>{{entry_detail.body}}</p>
+{% endblock %}
