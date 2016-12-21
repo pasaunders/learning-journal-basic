@@ -1,7 +1,41 @@
+"""Testing the learning journal app."""
+
 # import unittest
+
 import pytest
 from pyramid import testing
 
+
+def test_home_view():
+    """Test that what's returned by the view contains what we expect."""
+    from .views import home_page
+    request = testing.DummyRequest()
+    info = home_page(request)
+    assert "entry_list" in info
+
+
+@pytest.fixture()
+def testapp():
+    """Create an instance of our app for testing."""
+    from learning_journal_basic import main
+    app = main({})
+    from webtest import TestApp
+    return TestApp(app)
+
+
+def test_layout_root(testapp):
+    """Test that the contents of the root page contains <footer."""
+    response = testapp.get('/', status=200)
+    html = response.html
+    assert 'Created in the Code Fellows 401 Python Program' in html.find("footer").text
+
+
+def test_root_contents(testapp):
+    """Test that the contents of the root page contains as many <ul> tags as journal entries."""
+    from .views import LIST_TEMPLATE
+    response = testapp.get('/', status=200)
+    html = response.html
+    assert len(LIST_TEMPLATE) * 2 == len(html.findAll("li"))
 
 # class ViewTests(unittest.TestCase):
 #     def setUp(self):
@@ -28,28 +62,28 @@ from pyramid import testing
 #         res = self.testapp.get('/', status=200)
 #         self.assertTrue(b'Pyramid' in res.body)
 
-@pytest.fixture
-def req():
-    the_request = testing.DummyRequest()
-    return the_request
+# @pytest.fixture
+# def req():
+#     the_request = testing.DummyRequest()
+#     return the_request
 
 
-def test_home_page_renders_file_data(req):
-    """My home page view returns some data."""
-    from .views import home_page
-    response = home_page(req)
-    assert "message_goes_here" in response
+# def test_home_page_renders_file_data(req):
+#     """My home page view returns some data."""
+#     from .views import home_page
+#     response = home_page(req)
+#     assert "message_goes_here" in response
 
 
-@pytest.fixture
-def test():
-    """Test app fixture."""
-    from webtest import TestApp
-    from learning_journal_basic import main
-    app = main({})
+# @pytest.fixture
+# def test():
+#     """Test app fixture."""
+#     from webtest import TestApp
+#     from learning_journal_basic import main
+#     app = main({})
 
 
-def test_home_page_has_list(testapp):
-    """Response is a get to homepage, expecting a 200 response."""
-    response = testapp.get("/", status=200)
-    inner_html = response.html
+# def test_home_page_has_list(testapp):
+#     """Response is a get to homepage, expecting a 200 response."""
+#     response = testapp.get("/", status=200)
+#     inner_html = response.html
